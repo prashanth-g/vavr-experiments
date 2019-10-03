@@ -3,15 +3,36 @@ package com.prashanth.os.vavr;
 import io.vavr.Tuple2;
 import io.vavr.collection.List;
 import io.vavr.collection.Queue;
+import io.vavr.collection.SortedSet;
+import io.vavr.collection.TreeSet;
 import io.vavr.control.Option;
+import java.util.Comparator;
 
 public class FunctionalDatastructures {
 
   public static void main(String[] args) {
 
-    // functionalLinkedList();
+    functionalLinkedList();
 
     functionalQueue();
+
+    functionalSortedSet();
+  }
+
+  private static void functionalSortedSet() {
+    SortedSet<Integer> xs = TreeSet.of(2, 3, 4, 6, 7, 8, 1);
+
+    SortedSet<Integer> ys = xs.add(5);
+    // Immutable xs
+    System.out.println(xs);
+
+    // new ys
+    System.out.println(ys);
+
+    Comparator<Integer> comparator = (a, b) -> b - a;
+    SortedSet<Integer> reversed = TreeSet.of(comparator, 5,6,7,9,3,1);
+
+    System.out.println(reversed);
   }
 
   private static void functionalQueue() {
@@ -29,7 +50,8 @@ public class FunctionalDatastructures {
 
     // Deque when Queue is empty
     Tuple2<Integer, Queue<Integer>> tuple2B = Queue.of(1).dequeue();
-    Option<Tuple2<Integer, Queue<Integer>>> dequeEmpty =  tuple2B._2.dequeueOption();
+    Option<Tuple2<Integer, Queue<Integer>>> dequeEmpty = tuple2B._2
+        .dequeueOption();
     System.out.println(dequeEmpty.isDefined());
 
   }
